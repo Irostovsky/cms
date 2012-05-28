@@ -1,0 +1,22 @@
+defaults: &defaults
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: root
+  database: cms_dev
+  password:
+  socket: <%= ['/var/lib/mysql/mysql.sock', '/var/run/mysqld/mysqld.sock'].detect{ |socket| File.exist?(socket) } %>
+
+development:
+  <<: *defaults
+
+test: &test
+  <<: *defaults
+  database: cms_test
+
+production:
+  <<: *defaults
+  database: cms_production
+  password: r00t
+  host: localhost
